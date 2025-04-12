@@ -85,7 +85,6 @@ const clientConfigs: Record<string, ClientConfig> = {
     avatar: '/images/ginger.png',
     theme: 'custom',
     enableQrCode: true,
-    backgroundImage: '/patterns/circuit-board.svg',
     // newsletterSignup: {
     //   enabled: true,
     //   title: 'Subscribe to my newsletter',
