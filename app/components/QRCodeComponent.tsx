@@ -1,13 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
+import gsap from 'gsap';
 
 export default function QRCodeComponent({ url, name }: { url: string, name: string }) {
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
+  // Create ref for animation
+  const qrCodeRef = useRef<HTMLDivElement>(null);
+  
+  // Generate QR code
   useEffect(() => {
     let isMounted = true;
     
@@ -52,6 +57,34 @@ export default function QRCodeComponent({ url, name }: { url: string, name: stri
     };
   }, [url]);
   
+  // Animation effect when QR code is loaded
+  useEffect(() => {
+    if (!isLoading && qrCode && qrCodeRef.current) {
+      // Set initial state
+      gsap.set(qrCodeRef.current, { 
+        opacity: 0, 
+        scale: 0.8, 
+        y: 10 
+      });
+      
+      // Create animation
+      gsap.to(qrCodeRef.current, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "back.out(1.7)",
+      });
+    }
+    
+    // Clean up animation when component unmounts
+    return () => {
+      if (qrCodeRef.current) {
+        gsap.killTweensOf(qrCodeRef.current);
+      }
+    };
+  }, [isLoading, qrCode]);
+  
   if (isLoading) {
     return (
       <div className="w-full py-10 flex items-center justify-center">
@@ -73,7 +106,10 @@ export default function QRCodeComponent({ url, name }: { url: string, name: stri
   }
   
   return (
-    <div className="bg-white p-4 rounded-xl shadow-md">
+    <div 
+      ref={qrCodeRef}
+      className="bg-white p-4 rounded-xl shadow-md"
+    >
       {qrCode && (
         <div className="relative w-40 h-40 mx-auto">
           <Image 

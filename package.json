@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "gsap": "^3.12.7",
     "next": "15.3.0",
     "qrcode": "^1.5.3",
     "react": "^19.0.0",
