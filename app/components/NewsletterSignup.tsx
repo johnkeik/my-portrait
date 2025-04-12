@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ThemeStyles } from '@/app/utils/themeStyles';
 
 export default function NewsletterSignup({ 
   title, 
@@ -13,8 +14,7 @@ export default function NewsletterSignup({
   buttonText: string, 
   placeholder: string, 
   endpoint: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  themeStyles: any
+  themeStyles: ThemeStyles
 }) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');

@@ -2,6 +2,7 @@ export type Link = {
   title: string;
   url: string;
   icon?: string;
+  image?: string;
   isPinned?: boolean;
   analyticsId?: string;
 };
@@ -19,6 +20,18 @@ export type CustomTheme = {
   linkBorder?: string;
   linkShadow?: string;
   fontFamily?: string;
+};
+
+export type ContactInfo = {
+  phone?: string;
+  email?: string;
+  location?: {
+    address: string;
+    coordinates?: {
+      lat: number;
+      lng: number;
+    };
+  };
 };
 
 export type ClientConfig = {
@@ -39,6 +52,7 @@ export type ClientConfig = {
   };
   backgroundImage?: string;
   links: Link[];
+  contact?: ContactInfo;
   analytics?: {
     enabled: boolean;
     provider?: 'google' | 'custom';
@@ -55,11 +69,22 @@ const clientConfigs: Record<string, ClientConfig> = {
     avatar: '/images/aggi.png',
     theme: 'light',
     enableQrCode: true,
-    socialShareButtons: [
-      { platform: 'twitter', enabled: true },
-      { platform: 'facebook', enabled: true },
-      { platform: 'linkedin', enabled: true },
-    ],
+    contact: {
+      phone: '+30 6980708900',
+      email: 'chatz31agg@gmail.com',
+      location: {
+        address: 'Kilkis, Pedino 611 00',
+        coordinates: {
+          lat: 40.896323,
+          lng: 22.863423
+        }
+      }
+    },
+    // socialShareButtons: [
+    //   { platform: 'twitter', enabled: true },
+    //   { platform: 'facebook', enabled: true },
+    //   { platform: 'linkedin', enabled: true },
+    // ],
     // newsletterSignup: {
     //   enabled: true,
     //   title: 'Join my developer newsletter',
@@ -72,10 +97,9 @@ const clientConfigs: Record<string, ClientConfig> = {
       provider: 'custom',
     },
     links: [
-      { title: 'Website', url: 'https://example.com', isPinned: true },
-      { title: 'Facebook', url: 'https://github.com/johndoe' },
-      { title: 'Twitter', url: 'https://twitter.com/johndoe' },
-      { title: 'Instagram', url: 'https://instagram.com/johndoe' },
+      { title: 'Website', url: 'http://grainsbio.com/', isPinned: true, image: '/button-icons/chatzopoulos-logo.png' },
+      { title: 'Facebook', url: 'https://www.facebook.com/la.v.ebella.5', icon: 'facebook' },
+      { title: 'Instagram', url: 'https://www.instagram.com/aggeliki_chatzopoulou/', icon: 'instagram' },
     ]
   },
   'ginger': {
@@ -85,6 +109,17 @@ const clientConfigs: Record<string, ClientConfig> = {
     avatar: '/images/ginger.png',
     theme: 'custom',
     enableQrCode: true,
+    contact: {
+      phone: '+30 6983621605',
+      email: 'eirini@grainsbio.com',
+      location: {
+        address: 'Thessaloniki, Krithia 572 00',
+        coordinates: {
+          lat: 40.83811122676807,
+          lng: 22.97963245714484
+        }
+      }
+    },
     // newsletterSignup: {
     //   enabled: true,
     //   title: 'Subscribe to my newsletter',
@@ -98,16 +133,15 @@ const clientConfigs: Record<string, ClientConfig> = {
       trackingId: 'G-XXXXXXXX',
     },
     links: [
-      { title: 'Website', url: 'https://janesmith.com', isPinned: true },
-      { title: 'Facebook', url: 'https://github.com/johndoe' },
-      { title: 'Twitter', url: 'https://twitter.com/johndoe' },
-      { title: 'Instagram', url: 'https://instagram.com/johndoe' },
+      { title: 'Website', url: 'https://janesmith.com', isPinned: true, image: '/button-icons/chatzopoulos-logo.png'  },
+      { title: 'Facebook', url: 'https://www.facebook.com/eirinaki.chatzopoulou', icon: 'facebook' },
+      { title: 'Instagram', url: 'https://www.instagram.com/eirini.chatzopoulou/' , icon: 'instagram' },
     ],
-    socialShareButtons: [
-      { platform: 'twitter', enabled: true },
-      { platform: 'linkedin', enabled: true },
-      { platform: 'email', enabled: true },
-    ],
+    // socialShareButtons: [
+    //   { platform: 'twitter', enabled: true },
+    //   { platform: 'linkedin', enabled: true },
+    //   { platform: 'email', enabled: true },
+    // ],
   }
 };
 
