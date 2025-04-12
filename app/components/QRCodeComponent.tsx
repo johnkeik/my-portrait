@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function QRCodeComponent({ url, name }: { url: string, name: string }) {
   const [qrCode, setQrCode] = useState<string | null>(null);
@@ -73,7 +74,18 @@ export default function QRCodeComponent({ url, name }: { url: string, name: stri
   
   return (
     <div className="bg-white p-4 rounded-xl shadow-md">
-      {qrCode && <img src={qrCode} alt={`QR Code for ${name}`} className="w-40 h-40 mx-auto" />}
+      {qrCode && (
+        <div className="relative w-40 h-40 mx-auto">
+          <Image 
+            src={qrCode} 
+            alt={`QR Code for ${name}`}
+            fill
+            sizes="160px"
+            className="object-contain"
+            unoptimized // Required for data URLs
+          />
+        </div>
+      )}
       <p className="text-xs text-center mt-2 text-gray-500">Scan to visit this link tree</p>
     </div>
   );
