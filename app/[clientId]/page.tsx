@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getClientConfig } from '@/app/lib/getClientConfig';
 import LinkTree from '@/app/components/LinkTree';
 
-export default async function ClientPage({ params }: { params: { clientId: string } }) {
+export default async function ClientPage({ params }: { params: Promise<{ clientId: string }> }) {
   try {
     const param = await params;
     const clientConfig = await getClientConfig(param.clientId);
